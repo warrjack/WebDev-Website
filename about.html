@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="about-style.css">
+	<link rel="stylesheet" type="text/css" href="common.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+	<title>CompanyName - About Us</title>
+	<script defer type="text/javascript" src="nav.js"></script>
+	<script defer type="text/javascript" src="script.js"></script>
+</head>
+
+<body>
+	<nav>
+		<a id="nav-name" href="index.html">Company</a>
+		<ul>
+			<li><a href="index.html">Home</a></li>
+			<li><a href="index.html#products">Products</a>
+			<li><a href="#splash">About Us</a></li>
+			<li><a href="portfolio.html">Portfolio</a></li>
+		</ul>
+		<button class="primary-button" id="contact-nav" onclick="location.href='#contact'">Contact Us</button>
+		<div id="mobile-menu-toggle">
+		    <span></span>
+		    <span></span>
+		    <span></span>
+	    </div>	
+	    
+	</nav>
+	<div id="mobile-menu">
+	    <ul>
+	      	<li><a href="index.html" class="mobile-menu-item">Home</a></li>
+			<li><a href="index.html#products" class="mobile-menu-item">Products</a></li>
+			<li><a href="#splash" class="mobile-menu-item close-menu-animation">About Us</a></li>
+			<li><a href="portfolio.html" class="mobile-menu-item">Portfolio</a></li>
+	    </ul>
+	</div>
+	<div id="splash" class="grid-container">
+		<div class="left-container">
+			<h2 id="about-title">About Us</h2>
+			<h1 id="headline">Helping businesses <span id="highlight-text">succeed</span> without worrying about online presence.</h1>
+			<div id="small-screen-container">
+				<p id="about-text">Websites are the future of store-fronts. We specialize in creatin impactful, custom websites designed to drive results. Our mission is to help businesses of all sizes build a strong digital presence through flexible and modern web solutions. Whether you're a personal brand, an e-commerce business, or a growing enterprise, we craft and maintaine websites that not only look good, but work seemlessly to achieve your goals. Our team is committed to understanding your unique needs and delivering a website that aligns with your vision.</p>
+				<img id="small-screen-image" src="team.jpg">
+			</div>
+			<button id="cta" href="#contact">Book an Appointment</button>
+		</div>
+		<div class="right-container">
+			<img src="team.jpg">
+		</div>
+	</div>
+	<div id="why-choose-us" class="grid-container">
+		<div class="left-container">
+			<img id="main-img" src="https://www.shutterstock.com/image-photo/smiling-bearded-indian-businessman-working-600nw-1945041148.jpg">
+		</div>
+		<div class="right-container">
+			<h3 id="name-title">CompanyName Developments</h3>
+			<h1 id="why-choose-us-title">Why Choose Us</h1>
+			<p id="why-choose-us-description">This is the example of what would go here and company values to show off company benefits</p>
+			<div id="why-choose-us-grid">
+				<div class="why-choose-us-card">
+					<img id="card-img" src="https://icons.veryicon.com/png/o/miscellaneous/cloud-keeper/client-7.png">
+					<div class="card-text">
+						<p class="bold-highlight">Client First Approach</p>
+						<p class="card-paragraph">Explaination of what the point means and why its good.</p>
+					</div>
+				</div>
+				<div class="why-choose-us-card">
+					<img id="card-img" src="https://img.freepik.com/premium-vector/user-with-heart-icon-love-person-vector-illustration-eps-10-stock-image_797523-1840.jpg">
+					<div class="card-text">
+						<p class="bold-highlight">User Experience Focused</p>
+						<p class="card-paragraph">Explaination of what the point means and why its good.</p>
+					</div>
+				</div>
+				<div class="why-choose-us-card">
+					<img id="card-img" src="https://www.iconpacks.net/icons/1/free-pie-chart-icon-660-thumb.png">
+					<div class="card-text">
+						<p class="bold-highlight">Driven by Results & Analytics</p>
+						<p class="card-paragraph">Explaination of what the point means and why its good.</p>
+					</div>
+				</div>
+				<div class="why-choose-us-card">
+					<img id="card-img" src="https://static.vecteezy.com/system/resources/previews/010/332/153/non_2x/code-flat-color-outline-icon-free-png.png">
+					<div class="card-text">
+						<p class="bold-highlight">In-House Design & Development Teams</p>
+						<p class="card-paragraph">Explaination of what the point means and why its good.</p>
+					</div>
+				</div>
+				<div class="why-choose-us-card">
+					<img id="card-img" src="https://www.shutterstock.com/image-vector/technology-development-icon-innovation-concept-600nw-2474310907.jpg">
+					<div class="card-text">
+						<p class="bold-highlight">Comprehensive Maintanence Options</p>
+						<p class="card-paragraph">Explaination of what the point means and why its good.</p>
+					</div>
+				</div>
+				<div class="why-choose-us-card">
+					<img id="card-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPzgxYoFXDSUZWfvztvgoWkP_slpX8hNloHg&s">
+					<div class="card-text">
+						<p class="bold-highlight">Prioritizing Project Communication</p>
+						<p class="card-paragraph">Explaination of what the point means and why its good.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="secondary-section" class="grid-container">
+		<div class="left-container">
+			<h1 id="second-headline">We specialize in website applications and project management. Here is our process.</h1>
+		</div>
+		<div class="right-container" id="process-grid">
+			<div class="process-card">
+				<p><span class="bold-highlight">1. Consultation and Quote: </span>Discuss the project's goals and requirements to reach expectations.</p>
+			</div>
+			<div class="process-card">
+				<p><span class="bold-highlight">2. Design and Prototyping: </span>Mockups and drafts are created and discussed to ensure goals and vision will be met.</p>
+			</div>
+			<div class="process-card">
+				<p><span class="bold-highlight">3. Development: </span>The development team create a robust product with client revsions along the way.</p>
+			</div>
+			<div class="process-card">
+				<p><span class="bold-highlight">4. Revision: </span>Final revision for adjustments and outstanding inputs.</p>
+			</div>
+			<div class="process-card">
+				<p><span class="bold-highlight">5. Launch: </span>After final sign-off of approval, the site is transfered and able to go live.</p>
+			</div>
+		</div>
+	</div>
+	<div id="contact">
+		<h1>Ready to Get Started?</h1>
+		<div id="card-form" class="hidden">
+			<div class="left-container center-container">
+				<img src="email.jpg">
+			</div>
+			<div class="right-container">
+				<div class="inline-form-container">
+					<p>Full Name</p>
+					<input type="text" placeholder="John Doe">
+				</div>
+				<div class="inline-form-container">
+					<p>Company Name (Optional)</p>
+					<input type="text" placeholder="Company Inc">
+				</div>
+				<div class="inline-form-container">
+					<p>Email</p>
+					<input type="text" placeholder="example@domain.com">
+				</div>
+				<div class="inline-form-container">
+					<p>Subject</p>
+					<div id="dropdown">
+						<button onclick="dropdownFunction()" id="dropdown-button" class="dropdown-button">
+						    Outreach
+						    <div onclick="dropdownFunction()" class="dropdown-button"><img id="dropdown-arrow" class="dropdown-button" src="https://static.thenounproject.com/png/3012911-200.png" onclick="dropdownFunction()">
+						    </div>
+						</button>
+
+						<div class="dropdown-content">
+							<a onclick="selectOption('Outreach')">Outreach</a>
+							<a onclick="selectOption('Basic Plan')">Basic Plan</a>
+							<a onclick="selectOption('Standard Plan')">Standard Plan</a>
+							<a onclick="selectOption('Premium Plan')">Premium Plan</a>
+							<a onclick="selectOption('One-Time Site')">One-Time Site</a>
+							<a onclick="selectOption('Other')">Other</a>
+						</div>
+					</div>
+				</div>
+				<div class="inline-form-container">
+					<p>Message</p>
+					<textarea class="message-box" type="text" placeholder="Tell us about your project, needs, and timeline."></textarea>
+				</div>
+				<div class="center-container">
+					<button id="submit-button">Submit</button>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+
+</body>
+</html>

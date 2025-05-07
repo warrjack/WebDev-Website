@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" type="text/css" href="common.css">
+
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+	<title>Comp Name</title>
+
+	<script defer type="text/javascript" src="script.js"></script>
+	<script defer type="text/javascript" src="nav.js"></script>
+</head>
+<body>
+	<nav>
+		<!--img src="logo.png" id="nav-logo"-->
+		<p id="nav-name">Company</p>
+		<ul>
+			<li><a href="#splash">Home</a></li>
+			<li><a href="#products">Products</a></li>
+			<li><a href="about.html">About Us</a></li>
+			<li><a href="portfolio.html">Portfolio</a></li>
+		</ul>
+		<button class="primary-button" id="contact-nav" onclick="location.href='#contact'">Contact Us</button>
+
+		<div id="mobile-menu-toggle">
+		    <span></span>
+		    <span></span>
+		    <span></span>
+	    </div>	
+	    
+	</nav>
+	<div id="mobile-menu">
+	    <ul>
+	      	<li><a href="#splash" class="mobile-menu-item close-menu-animation">Home</a></li>
+			<li><a href="#products" class="mobile-menu-item close-menu-animation">Products</a></li>
+			<li><a href="about.html" class="mobile-menu-item">About Us</a></li>
+			<li><a href="portfolio.html" class="mobile-menu-item">Portfolio</a></li>
+	    </ul>
+	</div>
+	<div id="splash">
+		<div class="grid-container">
+			<div class="left-container">
+				<div class="center-container" id="mobile-splash-image-container">
+					<img id="mobile-splash-image" src="splash.png">
+				</div>
+				<!--img src="splash-background.jpg" id="splash-background"-->
+				<h1>Let's make a <span class="text-highlight-gradient">website</span> that works for your business.</h1>
+				<p>Creating iconic and seamless websites that clearly represent your message, engages your audience, and amplifies your results.</p>
+				<div id="cta">
+					<button id="get-started" class="secondary-button" onclick="location.href='portfolio.html'">See Our Work</button>
+					<button id="pricing" class="primary-button" onclick="location.href='#contact'">Book an Appointment</button>
+				</div>
+			</div>
+			<div class="right-container">
+				<img id="desktop-splash-image" src="splash.png">
+			</div>
+		</div>
+	</div>
+	<div id="what-we-do" class="center-container">
+		<div class="grid-container">
+			<div class="left-container hidden">
+
+				<h1>We build and manage websites so owners can grow their business.</h1>
+				<p>At CompanyName, we understand that websites are where most potential customers find businesses and create their first impressions. With the user experience being our top priority, we believe that we can design websites that fit best with your brand.</p>
+
+				<p><span class="bold-p-text">Designing</span> and <span class="bold-p-text">Coding</span> from the ground up enables us to have full flexibilty to suit your needs best. We offer advanced functionality and features such as <span class="bold-p-text">User Accounts and Membership</span> options to keep your customers engaged and offer exclusive services to your clients. We also provide in-depth <span class="bold-p-text">Analytics</span> to give you insight into what products and designs are creating the most traction for your business.</p>
+
+				<p>Whether its a simple website for your content or full of abstract animations and outside-the-box composition, we ensure that your site is refreshing and fully optimized to be fast and reliable on any device.
+				</p>
+				<div id="what-we-do-button-container">
+					<button class="secondary-button" onclick="location.href='about.html'">See More About Us</button>
+				</div>
+			</div>
+			<div class="right-container center-container hidden">
+				<div id="tools-grid">
+					<div class="tool-item">
+						<img src="html.png">
+					</div>
+					<div class="tool-item">
+						<img src="css.png">
+					</div>
+					<div class="tool-item">
+						<img src="javascript.png">
+					</div>
+					<div class="tool-item">
+						<img src="react.png">
+					</div>
+					<div class="tool-item">
+						<img src="django.png">
+					</div>
+					<div class="tool-item">
+						<img src="php.png">
+					</div>
+					<div class="tool-item">
+						<img src="python.png">
+					</div>
+					<div class="tool-item">
+						<img src="sql.png">
+					</div>
+					<div class="tool-item">
+						<img src="ai.png">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="why-choose-us">
+		<div class="center-container">
+			<h1>Why Choose Us?</h1>
+			<div id="why-choose-us-grid">
+				<div class="why-choose-us-card hidden">
+					<div class="center-container">
+						<img src="build.avif">
+					</div>
+					<h2>Build From Scratch</h2>
+					<p>We code and design websites from the ground up, so we can tweak, update, and improve your site anytime.</p>
+				</div>
+				<div class="why-choose-us-card hidden">
+					<div class="center-container">
+						<img src="support.jpg">
+					</div>
+					<h2>Ongoing Support</h2>
+					
+					<p>Continuous collaboration and fast updates based on your goals and user feedback to ensure ongoing improvement.</p>
+				</div>
+				<div class="why-choose-us-card hidden">
+					<div class="center-container">
+						<img src="ideas.jpg">
+					</div>
+					<h2>Always Fresh & Optimized</h2>
+					
+					<p>Your website stays modern, fast, and optimized as trends, technology, and your business evolves.</p>
+				</div>
+				<div class="why-choose-us-card hidden">
+					<div class="center-container">
+						<img src="analytics.jpg">
+					</div>
+					<h2>Analytics & Customer Data</h2>
+					
+					<p>Track performance, user behavior, and engagement to make data-informed updates that optimize your sites effectiveness and conversion rates.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="portfolio-preview">
+	</div>
+
+	<div id="products" class="center-container">
+		<h1 id="products-title">Plans That Work For Any Project</h1>
+		<p id="products-subtitle">Each plan's features are interchangable to suit your needs best</p>
+		<div id="products-grid">
+			<div id="basic-product" class="product-card hidden">
+				<p class="banner"></p>
+				<img src="https://em-content.zobj.net/source/apple/391/rocket_1f680.png">
+				<h3>BASIC</h3>
+				<p>Best for Individuals</p>
+				<!--<h1><span class="currency small-price-text">$</span>89<span class="currency small-price-text">/mo</span></h1>-->
+				<ul>
+					<li>Personalized Website Design</li>
+					<li>Custom Website Development</li>
+					<li>Bi-Weekly Revisions</li>
+					<li>Up to 5 Pages</li>
+					<li>SEO Optimization</li>
+					<li>Website Hosting Options</li>
+				</ul>
+				<div class="grow-box"></div>
+				<button id="view-more-details-button" onclick="location.href='#contact'; selectOption('Basic Plan');">Ask About Basic Plan</button>
+				
+			</div>
+			<div id="standard-product" class="product-card hidden">
+	      		<p class="banner" id="highlighted-banner">Most Popular</p>
+				<img src="https://em-content.zobj.net/source/apple/391/high-voltage_26a1.png">
+				<h3>STANDARD</h3>
+				<p>Best for small business owners & start-ups</p>
+				<!--<h1><span class="currency small-price-text">$</span>299<span class="currency small-price-text">/mo</span></h1>-->
+				<ul>
+					<li>New Website Design</li>
+					<li>Custom Website Development</li>
+					<li>Weekly Revisions</li>
+					<li>Content Layout changes</li>
+					<li>Up to 10 Pages</li>
+					<li>Advanced SEO Optimization</li>
+					<li>Website Hosting Options</li>
+					<li>Website Feature Integration</li>
+				</ul>
+				<div class="grow-box"></div>
+				<button id="view-more-details-button" onclick="location.href='#contact'; selectOption('Standard Plan');">Ask About Standard Plan</button>
+				
+			</div>
+			<div id="premium-product" class="product-card hidden">
+				<p class="banner"></p>
+				<img src="https://em-content.zobj.net/source/apple/391/glasses_1f453.png">
+				<h3>PREMIUM</h3>
+				<p>Best for larger businesses & developers</p>
+				<!--<h1><span class="currency small-price-text">$</span>599<span class="currency small-price-text">/mo</span></h1>-->
+				<ul>
+					<li>New Website Design</li>
+					<li>Unlimited Revisions</li>
+					<li>Full Redesigns, New Pages, and Custom Features</li>
+					<li>Unlimited Number of Pages</li>
+					<li>Full SEO and Performance Optimization</li>
+					<li>Web Hosting Options</li>
+					<li>Advanced Web App Development</li>
+				</ul>
+				<div class="grow-box"></div>
+				<button id="view-more-details-button" onclick="location.href='#contact'; selectOption('Premium Plan');">Ask About Premium Plan</button>
+				
+			</div>
+		</div>
+		<div class="center-container">
+			<p id="products-contact-text">Don't see what you're looking for? Send us a message about one-time sites or specific requirements.</p>
+			<button id="products-contact-button" onclick="location.href='#contact'">Contact Us</button>
+		</div>
+	</div>
+
+	<div id="contact">
+		<h1>Have an idea? Let's get started.</h1>
+		<div id="card-form" class="hidden">
+			<div class="left-container center-container">
+				<img src="email.jpg">
+			</div>
+			<div class="right-container">
+				<div class="inline-form-container">
+					<p>Full Name</p>
+					<input type="text" placeholder="John Doe">
+				</div>
+				<div class="inline-form-container">
+					<p>Company Name (Optional)</p>
+					<input type="text" placeholder="Company Inc">
+				</div>
+				<div class="inline-form-container">
+					<p>Email</p>
+					<input type="text" placeholder="example@domain.com">
+				</div>
+				<div class="inline-form-container">
+					<p>Subject</p>
+					<div id="dropdown">
+						<button onclick="dropdownFunction()" id="dropdown-button" class="dropdown-button">
+						    Outreach
+						    <div onclick="dropdownFunction()" class="dropdown-button"><img id="dropdown-arrow" class="dropdown-button" src="https://static.thenounproject.com/png/3012911-200.png" onclick="dropdownFunction()">
+						    </div>
+						</button>
+
+						<div class="dropdown-content">
+							<a onclick="selectOption('Outreach')">Outreach</a>
+							<a onclick="selectOption('Basic Plan')">Basic Plan</a>
+							<a onclick="selectOption('Standard Plan')">Standard Plan</a>
+							<a onclick="selectOption('Premium Plan')">Premium Plan</a>
+							<a onclick="selectOption('One-Time Site')">One-Time Site</a>
+							<a onclick="selectOption('Other')">Other</a>
+						</div>
+					</div>
+				</div>
+				<div class="inline-form-container">
+					<p>Message</p>
+					<textarea class="message-box" type="text" placeholder="Hi, I'm John. I have an idea for a website..."></textarea>
+				</div>
+				<div class="inline-form-container">
+					<p id="submit-button-alignment"> </p>
+					<div class="center-container">
+						<button id="submit-button">Submit</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</body>
+</html>
