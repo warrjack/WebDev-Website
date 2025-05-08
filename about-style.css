@@ -1,7 +1,12 @@
 nav, #nav-space{
 	background-color: white !important;
 }
-
+.center-container{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
 .primary-button {
   background-color: var(--light-blue);
   color: white;
@@ -19,8 +24,7 @@ nav, #nav-space{
 #splash{
 	height: auto;
 	width: calc(100% - 6rem);
-	margin-top: 128px;
-	margin-bottom: 128px;
+	margin: 128px 72px;
 }
 
 .grid-container{
@@ -28,7 +32,6 @@ nav, #nav-space{
 	justify-content: center;
 	align-items: center;
 	flex-direction: row;
-	margin: 0 6rem 0 6rem;
 }
 .left-container, .right-container{
 	display: flex;
@@ -105,7 +108,7 @@ img{
 
 /* Section 2 */
 #why-choose-us{
-	margin-bottom: 128px;
+	margin: 0px 72px 128px 72px;
 }
 
 #why-choose-us-title{
@@ -143,6 +146,7 @@ img{
 	display: inline-flex;
 	box-shadow: 0px 0px 8px 0px #80808072;
 	transition: .165s ease;
+	align-items: center;
 }
 .why-choose-us-card:hover{
 	box-shadow: 0px 0px 24px 0px #80808072;
@@ -162,7 +166,7 @@ img{
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	padding-right: 36px;
+	padding: 16px 36px 16px 0;
 }
 .card-text h2, .card-text p{
 	margin: 0;
@@ -176,6 +180,7 @@ img{
 #second-headline{
 	font-size: 3rem;
 	padding-right: 28px;
+	line-height: 3.5rem;
 }
 
 #secondary-section{
@@ -234,9 +239,8 @@ img{
 	flex-direction: row;
 	justify-content: space-between;
 	border-radius: 1rem;
-	width: 60%;
 	height: 70%;
-	padding: 2% 2%;
+	padding: 36px 16px;
 	box-shadow: 0 0 20px 4px #0000002b;
 }
 
@@ -363,7 +367,6 @@ img{
 	border-radius: .5rem;
 	color: white;
 	border: none;
-	margin-left: calc(200px);
 	margin-top: .5rem;
 	transition: 0.25s ease;
 
@@ -417,15 +420,15 @@ img{
 	#contact-nav{
 		padding: .75rem;
 	}#cta{
-		margin: var(--product-margin) 0 0 calc(50% - 90px - 24px);
+		/*margin: var(--product-margin) 0 0 calc(50% - 90px - 24px);*/
 	}
 	.primary-button, .secondary-button{
 		font-size: 1rem;
 		padding: 1rem;
 	}
-	#splash, .grid-container{
+	#splash{
 		height: auto;
-		margin: 72px 48px 160px 48px;
+		margin: 72px 48px 136px 48px;
 		width: calc(100% - 96px)
 	}
 	#splash h1{
@@ -445,9 +448,52 @@ img{
 		bottom: auto;
 		right: auto;
 	}
+	#why-choose-us, #secondary-section{
+		margin: 0 24px 128px 48px;
+	}
+	#why-choose-us .left-container{
+		width: 0;
+		display: none;
+	}
+	#why-choose-us .right-container{
+		width: auto;
+	}
+	#why-choose-us h3, #why-choose-us h1,  #why-choose-us-description{
+		margin-left: 24px;
+		margin-right: 24px;
+	}
+	#why-choose-us h1{
+		margin-top: 0;
+	}
+	#why-choose-us-grid{
+		margin-left: 24px;
+		margin-right: 24px;
+	}
+	#secondary-section{
+		margin-left: 48px;
+		margin-right: 48px;
+	}
+	#secondary-section{
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+	#secondary-section .left-container{
+		width: 100%;
+	}
+	#secondary-section .right-container{
+		width: auto;
+		margin-left: 48px;
+		margin-right: 48px;
+	}
 	#secondary-section h1{
-		margin: 1rem 2rem 1rem 0rem;
+		margin: 16px 0 32px 0;
 		font-size: 2.75rem;
+		line-height: 3rem;
+		padding-right: 0;
+	}
+	.process-card p{
+		line-height: 1.6rem;
 	}
 	#contact h1{
 		font-size: 2.5rem;
@@ -469,6 +515,9 @@ img{
 	}
 	#contact .right-container input{
 		margin-bottom: 0;
+	}
+	.center-container{
+		width: 100%;
 	}
 }
 
@@ -526,14 +575,24 @@ img{
 			width: calc(100% - 48px);
 		}
 
-		#cta{
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			flex-direction: row;
-			margin-left: 0;
-			margin-bottom: 24px;
-		}
+		
+	}
+
+	#splash #cta{
+		width: 100%;
+		border-radius: 50px;
+		margin-left: 0;
+	}
+
+	#why-choose-us h3, #why-choose-us h1, #why-choose-us-description{
+		margin-left: 0;
+	}
+
+	#why-choose-us{
+		margin-left: 24px;
+	}
+	#why-choose-us-grid{
+		margin: 0;
 	}
 	#small-screen-container img{
 		display: none;
@@ -541,7 +600,17 @@ img{
 	#small-screen-container p{
 		width: calc(100%);
 	}
-
+	#secondary-section {
+		margin-left: 24px;
+		margin-right: 24px;
+	}
+	#secondary-section .left-container h1{
+		line-height: 2.5rem;
+		font-size: 32px;
+	}
+	.card-text{
+		padding: 8px 16px 8px 0;
+	}
 	#contact h1{
 		font-size: 1.75rem;
 		text-align: center;
@@ -570,5 +639,8 @@ img{
 	}
 	#submit-button-alignment{
 		display: none;
+	}
+	#dropdown-button{
+		margin-left: 8px;
 	}
 }
