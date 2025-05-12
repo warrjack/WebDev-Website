@@ -6,17 +6,24 @@
 nav, #nav-space{
   background-color: white !important;
 }
+
 .primary-button {
-  background-color: var(--light-blue);
+  background-image: linear-gradient(135deg, var(--light-blue), var(--light-blue), var(--dark-purple-highlight), #724ae7);
+  background-size: 200% 200%; 
   color: white;
   padding: 1.425rem;
   border-radius: 15rem;
   font-size: 1.1rem;
   border: none;
   font-weight: 200;
-  transition: 0.1s ease-in-out;
+  transition: background 0.2s ease-in-out;
 }
 
+.primary-button:hover{
+  cursor: pointer;
+  background-position: 100% 100%;
+  background-size: 150% 150%;
+}
 
 .center-container {
   display: flex;
@@ -120,4 +127,40 @@ body{
 }
 .showcase-right .image-infront{
   margin-right: var(--image-overlap);
+}
+
+@media (max-width: 1441px){
+  .title p{
+    margin-bottom: 96px;
+  }
+  .work-description{
+    width: 512px;
+  }
+  .showcase-right {
+    margin-left: 48px;
+  }
+  .showcase-left{
+    margin-left: 48px;
+  }
+  .showcase-right .image-infront{
+    width: 400px;
+  }
+  .showcase-right .left-container .work-description{
+    margin-right: 36px;
+  }
+  .showcase-right .image-infront, .showcase-left .image-infront{
+    width: 428px;
+  }
+  .showcase-right .image-behind, .showcase-left .image-behind{
+    width: 380px;
+  }
+
+  .showcase-left{
+    margin-right: 96px;
+  }
+
+  .showcase-left .right-container{
+    margin-left: 56px;
+  }
+
 }
