@@ -29,7 +29,7 @@ nav, #nav-space{
 #splash{
 	height: auto;
 	width: calc(100% - 6rem);
-	margin: 128px 72px;
+	margin: 96px 72px;
 }
 
 .grid-container{
@@ -54,6 +54,9 @@ nav, #nav-space{
 	align-items: center;
 	width: 100%;
 	height: 100%;
+}
+#splash .right-container img{
+	margin-top: 22%;
 }
 #small-screen-image{
 	display: none;
@@ -395,6 +398,10 @@ img{
 		line-height: 60px;
 	}
 
+	#splash img{
+		marign-top: 0;
+	}
+
 	#small-screen-container{
 		display: flex;
 		flex-direction: row;
@@ -595,22 +602,21 @@ img{
 		#headline{
 			margin-top: 0px;
 			margin-left: 24px;
-			font-size: 2.5rem;
-			line-height: 2.5rem;
+			font-size: 56px;
+			line-height: 56px;
 		}
 
 		p{
 			margin-left: 24px;
 			width: calc(100% - 48px);
-		}
-
-		
+		}		
 	}
 
 	#splash #cta{
 		width: 100%;
 		border-radius: 50px;
 		margin-left: 0;
+		margin-top: 24px;
 	}
 
 	#why-choose-us h3, #why-choose-us h1, #why-choose-us-description{
@@ -619,8 +625,10 @@ img{
 
 	#why-choose-us{
 		margin-left: 24px;
+		margin-right: 24px;
 	}
 	#why-choose-us-grid{
+		grid-template-columns: repeat(1, 1fr);
 		margin: 0;
 	}
 	#small-screen-container img{

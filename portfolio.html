@@ -13,9 +13,9 @@
 	<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet"><link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
-	<script defer type="text/javascript" src="portfolio-script.js"></script>
-	<script defer type="text/javascript" src="nav.js"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script type="text/javascript" src="portfolio-script.js"></script>
+	<script defer type="text/javascript" src="nav.js"></script>
 </head>
 <body>
 	<nav>
@@ -26,7 +26,7 @@
 			<li><a href="about.html">About Us</a></li>
 			<li><a href="">Portfolio</a></li>
 		</ul>
-		<button class="primary-button" id="contact-nav" onclick="location.href='#contact'">Contact Us</button>
+		<button class="primary-button" id="contact-nav" onclick="location.href='index.html#contact'">Contact Us</button>
 		<div id="mobile-menu-toggle">
 		    <span></span>
 		    <span></span>
@@ -48,7 +48,7 @@
 	<div class="showcase-right">
 		<div class="left-container">
 			<h2 class="work-title">Work Title</h2>
-			<p class="work-description">Showing customers basic business information, social media handles, and an up to date menu of the latest events.Showing customers basic business information, social media handles, and an up to date menu of the latest events.</p>
+			<p class="work-description">This is the text that would be used to describe the concept requested by the client.</p>
 			<ul class="work-lists">
 				<li>Web Design</li>
 				<li>SEO Optimization</li>
@@ -61,20 +61,21 @@
 				<li>Blog</li>
 			</ul>
 		</div>
-		<div class="right-container">
-			<img class="image-infront" src="CoffeeShop.png">
-			<img class="image-behind" src="CoffeeShop.png">
+		<img class="small-image-infront" src="CoffeeShop_Splash.png">		
+		<div class="right-container image-container" image-data="CoffeeShop.png">
+			<img class="image-infront" src="CoffeeShop_Splash.png">
+			<!--<img class="image-behind" src="CoffeeShop.png">-->
 		</div>
 	</div>
 	<div class="showcase-left">
-		<div class="left-container">
-			<img class="image-behind" src="CoffeeShop.png">
-			<img class="image-infront" src="CoffeeShop.png">
+		<div class="left-container image-container" image-data="CoffeeShop.png">
+			<img class="image-infront" src="CoffeeShop_Splash.png">
 		</div>
+		<img class="small-image-infront" src="CoffeeShop_Splash.png">	
 		<div class="right-container">
 			<h2 class="work-title">Work Title</h2>
-			<p class="work-description">Showing customers basic business information, social media handles, and an up to date menu of the latest events.Showing customers basic business information, social media handles, and an up to date menu of the latest events.</p>
-			<ul clas="work-lists">
+			<p class="work-description">This is the text that would be used to describe the concept requested by the client.</p>
+			<ul class="work-lists">
 				<li>Web Design</li>
 				<li>SEO Optimization</li>
 				<li>AI Live Chat</li>
@@ -90,7 +91,7 @@
 	<div class="showcase-right">
 		<div class="left-container">
 			<h2 class="work-title">Work Title</h2>
-			<p class="work-description">Showing customers basic business information, social media handles, and an up to date menu of the latest events.Showing customers basic business information, social media handles, and an up to date menu of the latest events.</p>
+			<p class="work-description">This is the text that would be used to describe the concept requested by the client.</p>
 			<ul class="work-lists">
 				<li>Web Design</li>
 				<li>SEO Optimization</li>
@@ -103,10 +104,37 @@
 				<li>Blog</li>
 			</ul>
 		</div>
-		<div class="right-container">
-			<img class="image-infront" src="CoffeeShop.png">
-			<img class="image-behind" src="CoffeeShop.png">
+		<img class="small-image-infront" src="CoffeeShop_Splash.png">	
+		<div class="right-container image-container" image-data="CoffeeShop.png">
+			<img class="image-infront" src="CoffeeShop_Splash.png">
+			<!--<img class="image-behind" src="CoffeeShop.png">-->
 		</div>
+	</div>
+	<div class="showcase-left">
+			<div class="left-container image-container" image-data="CoffeeShop.png">
+				<img class="image-infront" src="CoffeeShop_Splash.png">
+			</div>
+			<img class="small-image-infront" src="CoffeeShop_Splash.png">	
+			<div class="right-container">
+				<h2 class="work-title">Work Title</h2>
+				<p class="work-description">This is the text that would be used to describe the concept requested by the client.</p>
+				<ul class="work-lists">
+					<li>Web Design</li>
+					<li>SEO Optimization</li>
+					<li>AI Live Chat</li>
+					<li>Interactive Animations</li>
+					<li>Send a message form the page</li>
+					<li>Blog</li>
+					<li>Interactive Animations</li>
+					<li>Send a message form the page</li>
+					<li>Blog</li>
+				</ul>
+			</div>
+		</div>
+
+	<div id="footer" class="center-container">
+		<p>Feeling inspired?</p>
+		<button class="primary-button" onclick="location.href='index.html#contact'"> Let's Get Started</button>
 	</div>
 </body>
 </html>

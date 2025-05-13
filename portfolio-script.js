@@ -15,6 +15,14 @@ document.querySelectorAll('.image-container').forEach(item => {
     });
 });
 
+// Set background image for future filtering
+window.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll('.image-container').forEach(el => {
+        const bg = el.getAttribute('image-data');
+        el.style.setProperty('--image-data-url', `url(${bg})`);
+     });
+     
+});
 // Get the modal, image elements, and close button
 const modal = document.getElementById("modal");
 const modalImg = document.getElementById("modal-img");
