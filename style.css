@@ -6,6 +6,7 @@
 #splash{
 	width: 100vw;
 	height: auto;
+	min-height: 800px;
 	margin-top: -3rem;
 	background-image: linear-gradient(
     180deg,
@@ -63,12 +64,13 @@
 
 #splash .right-container{
 	width: 35%;
+	position: relative;
 }
 
 #desktop-splash-image{
 	position: absolute;
 	margin: 0;
-	width: 36%;
+	width: 80%;
 	bottom: 0;
 	right: 8px;
 }
@@ -128,7 +130,8 @@
 #cta{
 	margin-top: 48px;
 	z-index: 5;
-	padding-bottom: 96px;
+	padding-bottom: 72px;
+	padding-top: 96px;
 }
 
 #cta button{
@@ -137,6 +140,10 @@
 	margin: 0 12px;
 	z-index: 5;
 	transition: 0.1s ease-in-out;
+}
+
+#splash .right-container{
+	position: relative;
 }
 
 .primary-button {
@@ -171,18 +178,39 @@
 	cursor: pointer;
 }
 
-
 #what-we-do-button-container{
 	margin: 0;
 	padding: 0;
 }
 
+.intro-animation{
+	animation: intro 1s forwards;
+  animation-fill-mode: backwards; /* <- this is key */
+	opacity: 1;
+}
+
+@keyframes intro{
+	0%{
+		opacity: 0;
+		transform: translateY(30px) scale(1);
+	}
+	100%{
+		opacity: 1;
+		transform: translateY(0px) scale(1);
+
+	}
+}
+
+.intro-two{ animation-delay: .2s }
+.intro-three{ animation-delay: .5s }
+
 /* What We Do */
 
 #what-we-do{
 	width: 100%;
-	padding: 96px 0 128px 0;
+	padding: 128px 0 128px 0;
   border-radius: 10% / 5%;
+  margin-left: 48px;
 }
 
 #what-we-do h1{
@@ -210,11 +238,15 @@
 	box-shadow: 0 0 4px 0px #0000002b;
 	padding: 16px;
 	background: #e6edfd;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .tool-item img{
 	width: 96px;
 	filter: brightness(.7);
+	aspect-ratio: 1 / 1;
 }
 
 #what-we-do .grid-container .left-container{
@@ -266,6 +298,13 @@
 	border-radius: var(--border-radius);
 	flex-grow: 1;
 	box-shadow: 0 0 14px 0 #0000002b;
+	position: relative;
+	transition: box-shadow 0.35s ease, opacity 1s;
+	animation-delay: box-shadow 0;
+}
+
+.product-card:hover{
+	box-shadow: 0 0 14px 0 #4f72fb;
 }
 
 #standard-product{
@@ -274,18 +313,16 @@
 	z-index: 5;
 }
 
-
-
 .product-card-image{
 	width: calc(100% - 32px);
-	height: calc(100% * 0.38);
+	aspect-ratio: 1 / .69898;
 	overflow: hidden;
-	height: 274px;
 	border-radius: 16px;
 	border: solid 1px #00000028;
 	margin: 16px;
 	object-fit: cover;
-	/*box-shadow: 0px 0px 8px 0px #00000014;*/
+	/*box-shadow: 0px 0px 8px 0px #00000014;
+	height: 274px;*/
 }
 
 .product-card-title{
@@ -432,7 +469,7 @@
 	align-items: center;
 	aspect-ratio: 1/.8;
 	box-shadow: 0 0 20px 0px #0000002b;
-	transition: 0.2s ease;
+	transition: 0.6s ease;
 	will-change: transform;
 }
 
@@ -471,8 +508,9 @@
 	justify-content: space-between;
 	border-radius: 1rem;
 	height: 70%;
-	padding: 36px 16px;
+	padding: 36px 32px;
 	box-shadow: 0 0 20px 4px #0000002b;
+	transition: .6s;
 }
 
 #contact h1{
@@ -609,38 +647,68 @@
 	width: 100%;
 }
 
+#enter-form{
+	 display: flex;
+	 flex-direction: column;
+}
+
 #submit-button:hover{
 	cursor: pointer;
   background-position: 100% 100%;
   background-size: 150% 150%;
 }
 
+#mail-success{
+	display: none;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+#mail-success img{
+	width: 96px;
+}
+#mail-success h2{
+	margin-bottom: 8px;
+}
+#mail-success p{
+	text-align: center;
+	margin-top: 8px;
+	line-height: 18px;
+}
+
 /*https://land-book.com/websites/74456-free-ai-video-generator-create-ai-videos-in-140-languages*/
 
 /* Hidden Animation */
-
 .hidden{
 	opacity: 0;
-	transition: all 1s;
 }
 
+.product-card:nth-child(1), .product-card:nth-child(3){
+	transition: opacity 1s ease 300ms, box-shadow 0.3s ease;
 
-.why-choose-us-card:nth-child(2), #card-form{
-	transition-delay: 200ms;
-}
-.why-choose-us-card:nth-child(3), .product-card:nth-child(1), .product-card:nth-child(3){
-	transition-delay: 300ms;
-}
-.why-choose-us-card:nth-child(4){
-	transition-delay: 400ms;
 }
 
 .show{
 	opacity: 100%;
 }
 
+.why-choose-us-card:nth-child(2), #card-form{
+	transition-delay: .2s;
+}
+.why-choose-us-card:nth-child(3){
+	transition-delay: .4s;
+}
+.why-choose-us-card:nth-child(4){
+	transition-delay: .6s;
+}
+
 /* Media Query */
 @media(max-width: 1441px){	
+	#splash{
+		height: auto;
+		min-height: auto;
+	}
 	#splash h1{
 		font-size: 64px;
 		line-height: 68px;
@@ -774,24 +842,28 @@
 	}
 
 	#products h1{
-		font-size: 2.25rem;
-		margin-bottom: 4px;
+		font-size: 36px;
+		margin-bottom: 0px;
+		line-height: 36px;
 	}
 	.product-card p{
-		margin: 4px 16px 32px 16px;
+		margin: 4px 16px 8px 16px;
 		height: 40px;
 	}
 	.product-card ul{
+		margin-bottom: 24px;
 	}
 	.product-card li{
 		font-size: 14px;
 		padding: .25rem 0;
+		line-height: 16px;
 	}
 	.product-card button{
 		margin-top: 24px;
-		font-size: 14px;
+		font-size: 16px;
 		min-width: 200px;
-		padding: 16px 0;
+		padding: 20px 24px;
+		width: auto;
 	}
 	.product-card #highlighted-banner{
 		height: auto;
@@ -881,8 +953,27 @@
 		width: calc(50% - 1.5rem);
 	}
 
+	#products-grid{
+		gap: 12px;
+		width: calc(100% - 48px);
+		margin: 0 24px;
+	}
+
 	.product-card ul{
 		width: 80%;
+	}
+
+	.products-subtitle{
+		margin-bottom: 48px;
+	}
+
+	.product-card p{
+		font-size: 16px;
+	}
+
+	.product-card button{
+		padding: 18px;
+		font-size: 14px;
 	}
 }
 @media(max-width: 495px){
@@ -993,13 +1084,13 @@
 	}
 
 	#products-title{
-		margin: 4rem 24px 0 24px;
+		margin: 64px 12px 0 12px;
 		text-align: center;
 	}
 	#products-subtitle{
-		font-size: 1rem;
+		font-size: 16px;
 		margin: 16px 24px 32px 24px;
-		line-height: 40px;
+		line-height: 18px;
 	}
 	#products-grid{
 		flex-direction: column;
@@ -1007,6 +1098,11 @@
 	}
 	.product-card{
 		width: 100%;
+	}
+
+	.product-card button{
+		font-size: 18px;
+		padding: 20px 24px;
 	}
 
 	#contact h1{

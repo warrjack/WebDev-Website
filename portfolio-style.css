@@ -56,6 +56,7 @@ nav, #nav-space{
 /* Entire Showcase Row */
 .small-image-infront{
   display: none;
+  box-shadow: 0 0 16px 8px #00000025
 }
 .showcase-left, .showcase-right{
   margin: 0 0 140px 0;

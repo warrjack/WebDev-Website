@@ -114,6 +114,28 @@ img{
 	width: 80%;
 }
 
+.intro-animation{
+	animation: intro 1s forwards;
+  animation-fill-mode: backwards; /* <- this is key */
+	opacity: 1;
+}
+
+@keyframes intro{
+	0%{
+		opacity: 0;
+		transform: translateY(30px) scale(1);
+	}
+	100%{
+		opacity: 1;
+		transform: translateY(0px) scale(1);
+
+	}
+}
+
+.intro-two{ animation-delay: .2s }
+.intro-three{ animation-delay: .5s }
+
+
 /* Section 2 */
 #why-choose-us{
 	margin: 0px 72px 128px 72px;
@@ -367,8 +389,8 @@ img{
 }
 
 #submit-button{
-	background-image: linear-gradient(135deg, var(--light-purple-highlight), var(--medium-purple-highlight), var(--dark-purple-highlight));
-	font-size: 1.1rem;
+	background-image: linear-gradient(135deg, var(--light-purple-highlight), var(--medium-purple-highlight), var(--dark-purple-highlight), #724ae7);
+  background-size: 150% 150%; 
 	width: 8rem;
 	height: auto;
 	padding: .5rem;
@@ -377,14 +399,60 @@ img{
 	border: none;
 	margin-top: .5rem;
 	transition: 0.25s ease;
-
+	font-size: 1rem;
 }
 
 #submit-button:hover{
-	width: calc(8rem + 10px);
 	cursor: pointer;
+  background-position: 100% 100%;
+  background-size: 150% 150%;
+
+}
+.inline-form-container .center-container{
+ 	width: 100%;
 }
 
+#card-form .right-container .inline-form-container .center-container{
+	width: 100%;
+}
+
+#enter-form{
+	 display: flex;
+	 flex-direction: column;
+}
+
+#submit-button:hover{
+	cursor: pointer;
+  background-position: 100% 100%;
+  background-size: 150% 150%;
+}
+
+#mail-success{
+	display: none;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+#mail-success img{
+	width: 96px;
+}
+#mail-success h2{
+	margin-bottom: 8px;
+}
+#mail-success p{
+	text-align: center;
+	margin-top: 8px;
+	line-height: 18px;
+}
+
+.show{
+	opacity: 100%;
+}
+
+.hidden{
+	opacity: 0;
+}
 
 /* Media Query */
 @media(max-width: 1440px){/*1281px){*/

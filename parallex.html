@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Scroll Speed Text (Bounded)</title>
+  <style>
+    body {
+      height: 300vh;
+      margin: 0;
+      font-family: sans-serif;
+      background: #fff;
+    }
+
+    .text-wrapper {
+    	display: flex;
+    	flex-direction: row;
+    	align-items: center;
+      position: relative;
+      padding: 100px;
+      font-size: 48px;
+      background: lightblue;
+      overflow: hidden;
+    }
+
+    .fixed-text {
+      color: black;
+    }
+
+    .scroll-text {
+      color: blue;
+      position: absolute;
+      bottom: -662px;
+      left: 50%;
+      right: 0;
+      will-change: transform;
+    }
+
+    .blank{
+    	width: 100%;
+    	height: 50vh;
+    }
+
+    .blank:nth-child(even){
+    	background: #DDDDDD;
+    }
+
+    .inner-text{
+    	width: auto;
+    	font-size: 15vw;
+    }
+  </style>
+</head>
+<body>
+	<div class="blank"></div>
+	<div class="blank"></div>
+	<div class="blank"></div>
+	<div class="text-wrapper" id="textWrapper">
+		<div class="fixed-text inner-text">Fixed</div>
+		<div class="scroll-text inner-text" id="scrollText">Scroll</div>
+	</div>
+	<div class="blank"></div>
+	<div class="blank"></div>
+	<div class="blank"></div>
+	
+
+
+	<script>
+	  const scrollText = document.getElementById('scrollText');
+	  const wrapper = document.getElementById('textWrapper');
+	  const speedMultiplier = 8;
+
+
+	  const startY = 331;  // Starting offset inside container (px from top)
+	  const endY = -331;    // Ending offset inside container (px from top)
+	  const diff = startY - endY;
+
+	  window.addEventListener('scroll', () => {
+	  	//get distance from top of wrapper to top of viewport
+	    const wrapperRect = wrapper.getBoundingClientRect();
+	    //height of browser window
+	    const viewportHeight = window.innerHeight;
+	    //get height of scrolling text
+	    const fontHeight = scrollText.clientHeight;
+
+	    // Amount of the wrapper that has scrolled into the viewport
+	    //point where wrapper enters viewport
+	    const start = viewportHeight ;
+	    console.log(start)
+	    //point where wrapper leaves viewport
+	    const end = -wrapperRect.height;
+
+	    // Calculate progress from 0 to 1
+	    const progress = (wrapperRect.top - end) / (start - end);
+	    // /console.log(wrapperRect.top - end, start - end, progress);
+	    const clampedProgress = Math.min(Math.max(progress, 0), 1);
+
+	    // Calculate vertical translation from bottom (100%) to top (0%)
+	    const maxMove = (wrapper.offsetHeight - scrollText.offsetHeight) * speedMultiplier;
+	    const translateY = (1 - clampedProgress) * maxMove;
+
+	    scrollText.style.transform = `translateY(-${translateY}px)`;
+	  });
+	</script>
+
+
+</body>
+</html>

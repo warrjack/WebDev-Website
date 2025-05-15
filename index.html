@@ -40,24 +40,24 @@
 			<li><a href="#products" class="mobile-menu-item close-menu-animation">Products</a></li>
 			<li><a href="about.html" class="mobile-menu-item">About Us</a></li>
 			<li><a href="portfolio.html" class="mobile-menu-item">Portfolio</a></li>
-			<li><a href="portfolio.html" class="mobile-menu-item">Contact Us</a></li>
+			<li><a href="#contact" class="mobile-menu-item">Contact Us</a></li>
 	    </ul>
 	</div>
 	<div id="splash">
 		<div class="grid-container">
 			<div class="left-container">
 				<div class="center-container" id="mobile-splash-image-container">
-					<img id="mobile-splash-image" src="splash.png">
+					<img id="mobile-splash-image" src="splash.png" class="intro-animation">
 				</div>
 				<!--img src="splash-background.jpg" id="splash-background"-->
-				<h1>Let's make a <span class="text-highlight-gradient">website</span> that works for your business.</h1>
-				<p>Creating iconic and seamless websites that clearly represent your message, engages your audience, and amplifies your results.</p>
-				<div id="cta">
+				<h1 class="intro-animation intro-one">Let's make a <span class="text-highlight-gradient">website</span> that works for your business.</h1>
+				<p class="intro-animation intro-two">Creating iconic and seamless websites that clearly represent your message, engages your audience, and amplifies your results.</p>
+				<div id="cta" class="intro-animation intro-three">
 					<button id="get-started" class="secondary-button" onclick="location.href='portfolio.html'">See Our Work</button>
 					<button id="pricing" class="primary-button" onclick="location.href='#contact'">Send a Message</button>
 				</div>
 			</div>
-			<div class="right-container">
+			<div class="right-container intro-animation intro-three">
 				<img id="desktop-splash-image" src="splash.png">
 			</div>
 		</div>
@@ -220,47 +220,54 @@
 			<div class="left-container center-container">
 				<img src="email.jpg">
 			</div>
-			<div class="right-container">
-				<div class="inline-form-container">
-					<p>Full Name</p>
-					<input type="text" placeholder="John Doe">
-				</div>
-				<div class="inline-form-container">
-					<p>Company Name (Optional)</p>
-					<input type="text" placeholder="Company Inc">
-				</div>
-				<div class="inline-form-container">
-					<p>Email</p>
-					<input type="text" placeholder="example@domain.com">
-				</div>
-				<div class="inline-form-container">
-					<p>Subject</p>
-					<div id="dropdown">
-						<button onclick="dropdownFunction()" id="dropdown-button" class="dropdown-button">
-						    Outreach
-						    <div onclick="dropdownFunction()" class="dropdown-button"><img id="dropdown-arrow" class="dropdown-button" src="https://static.thenounproject.com/png/3012911-200.png" onclick="dropdownFunction()">
-						    </div>
-						</button>
+			<div class="right-container" id="mail-right-container">
+				<div id="enter-form">
+					<div class="inline-form-container">
+						<p>Full Name</p>
+						<input type="text" placeholder="John Doe">
+					</div>
+					<div class="inline-form-container">
+						<p>Company Name (Optional)</p>
+						<input type="text" placeholder="Company Inc">
+					</div>
+					<div class="inline-form-container">
+						<p>Email</p>
+						<input type="text" placeholder="example@domain.com">
+					</div>
+					<div class="inline-form-container">
+						<p>Subject</p>
+						<div id="dropdown">
+							<button onclick="dropdownFunction()" id="dropdown-button" class="dropdown-button">
+							    Outreach
+							    <div onclick="dropdownFunction()" class="dropdown-button"><img id="dropdown-arrow" class="dropdown-button" src="https://static.thenounproject.com/png/3012911-200.png" onclick="dropdownFunction()">
+							    </div>
+							</button>
 
-						<div class="dropdown-content">
-							<a onclick="selectOption('Outreach')">Outreach</a>
-							<a onclick="selectOption('Basic Plan')">Basic Plan</a>
-							<a onclick="selectOption('Standard Plan')">Standard Plan</a>
-							<a onclick="selectOption('Premium Plan')">Premium Plan</a>
-							<a onclick="selectOption('One-Time Site')">One-Time Site</a>
-							<a onclick="selectOption('Other')">Other</a>
+							<div class="dropdown-content">
+								<a onclick="selectOption('Outreach')">Outreach</a>
+								<a onclick="selectOption('Basic Plan')">Basic Plan</a>
+								<a onclick="selectOption('Standard Plan')">Standard Plan</a>
+								<a onclick="selectOption('Premium Plan')">Premium Plan</a>
+								<a onclick="selectOption('One-Time Site')">One-Time Site</a>
+								<a onclick="selectOption('Other')">Other</a>
+							</div>
+						</div>
+					</div>
+					<div class="inline-form-container">
+						<p>Message</p>
+						<textarea class="message-box" type="text" placeholder="Hi, I'm John. I have an idea for a website..."></textarea>
+					</div>
+					<div class="inline-form-container">
+						<p id="submit-button-alignment"> </p>
+						<div class="center-container">
+							<button id="submit-button" onclick="submitHandler()">Submit</button>
 						</div>
 					</div>
 				</div>
-				<div class="inline-form-container">
-					<p>Message</p>
-					<textarea class="message-box" type="text" placeholder="Hi, I'm John. I have an idea for a website..."></textarea>
-				</div>
-				<div class="inline-form-container">
-					<p id="submit-button-alignment"> </p>
-					<div class="center-container">
-						<button id="submit-button">Submit</button>
-					</div>
+				<div id="mail-success">
+					<img src="check-512.webp">
+					<h2>Successfully Sent!</h2>
+					<p>You will hear from us very soon!</p>
 				</div>
 			</div>
 		</div>

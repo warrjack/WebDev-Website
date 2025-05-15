@@ -27,3 +27,38 @@ function selectOption(option){
   else if(option == "Other"){ messageBoxPlaceholder.placeholder = "Hi there, I'm Jack. I wanted to reach out about a project of mine...";}
   else { messageBoxPlaceholder.placeholder = "Hi there, I'm Kevin. I have an idea for a website...";}
 }
+
+function submitHandler(){
+  const enterScreen = document.getElementById("enter-form");
+  const successScreen = document.getElementById("mail-success");
+
+  const enterScreenRect = enterScreen.getBoundingClientRect();
+
+  var screenSize = window.innerWidth;
+
+  let diff
+
+  const width = window.innerWidth;
+  if (width >= 1441){
+    diff = 73;
+  }
+
+  enterScreen.style.display = 'none';
+  successScreen.style.display = 'flex';
+  successScreen.style.width = `${enterScreenRect.width - diff}px`;
+  successScreen.style.height = `${enterScreenRect.height}px`;
+}
+
+// Fade Animation
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting){
+      entry.target.classList.add('show');
+    } else{
+      entry.target.classList.remove('show')
+    }
+  });
+})
+
+const hiddenElements = document.querySelectorAll('.hidden', '.hidden-slide')
+hiddenElements.forEach((el) => observer.observe(el));

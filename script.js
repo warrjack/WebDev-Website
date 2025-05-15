@@ -1,3 +1,4 @@
+// Fade Animation
 const observer = new IntersectionObserver((entries) => {
 	entries.forEach((entry) => {
 		if (entry.isIntersecting){
@@ -11,11 +12,11 @@ const observer = new IntersectionObserver((entries) => {
 const hiddenElements = document.querySelectorAll('.hidden', '.hidden-slide')
 hiddenElements.forEach((el) => observer.observe(el));
 
+// -- CARD FLIPPING ANIMATION --
 // Select all buttons with the "View More Details" id
 const flipCards = document.querySelectorAll('.flip-card');
 const viewMoreButtons = document.querySelectorAll('#view-more-details-button');
 const viewSummaryButtons = document.querySelectorAll('#view-summary-button');
-
 // Loop through the buttons and add event listeners
 viewMoreButtons.forEach((button) => {
   button.addEventListener('click', function() {
@@ -26,7 +27,6 @@ viewMoreButtons.forEach((button) => {
     flipCardInner.classList.toggle('flipped');
   });
 });
-
 viewSummaryButtons.forEach((button) => {
   button.addEventListener('click', function() {
     // Get the flip-card-inner element that corresponds to the button clicked
@@ -65,4 +65,25 @@ function selectOption(option){
   else if(option == "Premium Plan"){ messageBoxPlaceholder.placeholder = "Hi, I'm Mark. I have a business that would benefit from a new app...";}
   else if(option == "Other"){ messageBoxPlaceholder.placeholder = "Hi there, I'm Jack. I wanted to reach out about a project of mine...";}
   else { messageBoxPlaceholder.placeholder = "Hi there, I'm Kevin. I have an idea for a website...";}
+}
+
+function submitHandler(){
+  const enterScreen = document.getElementById("enter-form");
+  const successScreen = document.getElementById("mail-success");
+
+  const enterScreenRect = enterScreen.getBoundingClientRect();
+
+  var screenSize = window.innerWidth;
+
+  let diff
+
+  const width = window.innerWidth;
+  if (width >= 1441){
+    diff = 73;
+  }
+
+  enterScreen.style.display = 'none';
+  successScreen.style.display = 'flex';
+  successScreen.style.width = `${enterScreenRect.width - diff}px`;
+  successScreen.style.height = `${enterScreenRect.height}px`;
 }

@@ -15,6 +15,8 @@ mobileItems.forEach((element) => {
 	element.addEventListener('click', () =>{
 		mobileMenu.classList.toggle('active');
 		offScreenMenu.classList.toggle('active');
+    // If true, make false. If false, make true.
+    scrollStatusNav ? (disableScroll(), scrollStatusNav = false) : (enableScroll(), scrollStatusNav = true);
 
 	})
 })
@@ -45,7 +47,7 @@ try {
 var wheelOpt = supportsPassive ? { passive: false } : false;
 var wheelEvent = 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewheel';
 
-// call this to Disable
+// call this to Disable scroll
 function disableScroll() {
   window.addEventListener('DOMMouseScroll', preventDefault, false); // older FF
   window.addEventListener(wheelEvent, preventDefault, wheelOpt); // modern desktop
@@ -53,7 +55,7 @@ function disableScroll() {
   window.addEventListener('keydown', preventDefaultForScrollKeys, false);
 }
 
-// call this to Enable
+// call this to Enable scroll
 function enableScroll() {
   window.removeEventListener('DOMMouseScroll', preventDefault, false);
   window.removeEventListener(wheelEvent, preventDefault, wheelOpt); 
