@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="style.css"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="author" content="Jack Warr">
+		<meta name="description" content="Create a simple Budget Sheet for your personal income and outgoings that happen on irregular time intervals.">
+		<meta name="keywords" content="finance, personal, money, income, spreadsheet, excel">
+
+		<style>
+			:root{
+	--negative: #FF9AA2;
+	--positive: #B5EAD7;
+	--header: #CCCCCC;
+	--even: #EAEAEA;
+	--odd: #FFFFFF;
+}
+
+*{
+	font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+	transition: 180ms ease-in-out;
+}
+
+body{
+	background-color: #FAFAFA;
+}
+
+.centered-div {
+	display: flex;
+	justify-content: center; /* Horizontal center */
+}
+
+.grid-container{
+	display: inline-flex;
+}
+
+/* Button Template */
+.stand-out-button {
+	appearance: none;
+	border: 1px solid rgba(27, 31, 35, .15);
+	border-radius: 6px;
+	box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+	box-sizing: border-box;
+	color: #fff;
+	cursor: pointer;
+	display: inline-block;
+	font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 20px;
+	padding: 6px 16px;
+	position: relative;
+	text-align: center;
+	text-decoration: none;
+	user-select: none;
+	-webkit-user-select: none;
+	touch-action: manipulation;
+	vertical-align: middle;
+	white-space: nowrap;
+
+}
+
+button{
+	transition: 50ms ease-in-out;
+}
+
+#options{
+	margin-bottom: 16px;
+}
+#options button{
+	margin: 0 1px 0 1px;
+	width: auto;
+	padding: 10px 15spx;
+	background-color: #0d74e7;
+}
+#options button:nth-child(1){
+	margin-left: 16px;
+}
+#options button:hover{
+	background-color: #0B67E3;
+}
+
+#title-cell{
+	width: 100%;
+	background-color: #FFF;
+	align-content: center;
+	align-items: center;
+}
+#title-cell input{
+	width: 90%;
+	margin-left: 5%;
+	border: none;
+	font-size: 1.1em;
+}
+
+/* Tables */
+
+td{
+	height: 36px;
+	align-content: center;
+	border-left: 1px solid gray;
+	border: none;
+}
+
+#input-table td{
+	min-width: 180px;
+}
+
+th{
+	background-color: var(--header);
+}
+
+#calc-table tr:nth-child(odd), #input-table tr:nth-child(odd){
+	background-color: var(--odd);
+}
+#input-table tr:nth-child(even), #calc-table tr:nth-child(even){
+	background-color: var(--even);
+}
+
+#input-table tr, #calc-table tr, #deletion-table tr{ 
+	border: none;
+	padding: 0;
+}
+
+#calc-table thead th {
+	min-width: 112px;
+}
+
+#calc-table th p, #input-table th p{
+	margin: 0;
+	padding: 0;
+}
+p {
+  margin-block-start: 0; /* Removes the top margin */
+  margin-block-end: 0; /* Removes the bottom margin */
+}
+
+.name, .amount{
+	border: none;
+	font-size: 1em;
+	padding-left: 8px;
+}
+
+#input-table, #calc-table , #deletion-table {
+	border-collapse: collapse;
+	border-radius: 10px;
+	margin: 0 10px 0 10px;
+	overflow: hidden;
+	border: none;
+	padding: 0;
+}
+
+.shadow-box{
+	box-shadow: 0 0 20px 0 #BFBFBF;
+}
+
+
+input[type="text"]{
+	background-color: transparent;
+}
+
+input[type="text"]:focus{
+	border: none;
+	outline: none;
+}
+
+#calc-table td{
+	text-align: center;
+	border: none;
+}
+
+#name{
+	/* width: 80px;*/
+}
+
+#frequency-cell{
+	text-align: center;
+}
+#frequency-select{
+	/* width: 112px; */
+}
+
+/* Deletion Table */
+#deletion-table table{
+	margin: 0;
+	padding: 0;
+	background-color: transparent;
+	box-shadow: none;
+}
+#deletion-table th, #deletion-table tr, #deletion-table p, #deletion-table td{
+	background-color: transparent;
+	color: transparent;
+}
+#deletion-table td{
+	border: none;
+	min-width: 20px;
+	width: 1em;
+}
+
+#deletion-table input{
+	background-color: #BD2C00;
+	width: 30px;
+	color: #FFFFFF;
+	aspect-ratio: 1/1;
+	align-items: center;
+	padding: 0;
+}
+#delete-button {
+  text-align: center;
+}
+#delete-button:hover {
+  background-color: #BB1F00;
+}
+
+/* Add Button */
+#add-button {
+	background-color: #2EA44F;  
+	width: 40%;
+	height: 48px;
+	margin-top: 20px;
+}
+#add-button:focus:not(:focus-visible):not(.focus-visible) {
+  box-shadow: none;
+  outline: none;
+}
+
+#add-button:hover {
+  background-color: #2c974b;
+}
+
+#add-button:focus {
+  box-shadow: rgba(46, 164, 79, .4) 0 0 0 3px;
+  outline: none;
+}
+
+#add-button:disabled {
+  background-color: #94d3a2;
+  border-color: rgba(27, 31, 35, .1);
+  color: rgba(255, 255, 255, .8);
+  cursor: default;
+}
+
+#add-button:active {
+  background-color: #298e46;
+  box-shadow: rgba(20, 70, 32, .2) 0 1px 0 inset;
+}
+#show-second-table{
+	height: 48px;
+	margin-left: 14px;
+	margin-top: 20px;
+	width: auto;
+	background-color: orange;
+	display: none;
+}
+
+.button-container{
+	width: 80%;
+	height: 80%;
+}
+
+ /* Colour pop-up */
+ .colour-prompt-c{
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1000; /* Sit on top */
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fefefe;
+  border: 1px solid #888;
+  width: 80%; /* Adjust width as needed */
+  max-width: 400px; /* Maximum width */
+  padding: 12px 0 0 0;
+  border-radius: 6px;
+}
+
+/* Modal content */
+.colour-prompt-content {
+  position: relative;
+  width: 100%;
+}
+
+/* Close button */
+.close {
+  position: absolute;
+  top: -14px;
+  right: 10px;
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Overlay */
+#overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  z-index: 900; /* Sit below the modal */
+}
+
+#colour-picker-table{
+	grid-template-columns: repeat(2, 1fr);
+	padding: 0;
+}
+
+#colour-picker-table td{
+	border-bottom: 1px #DADADA solid;
+}
+
+#colour-picker-table tr:nth-child(1){
+	padding-top: 18px;
+	font-weight: 500;
+	padding: 16px 0;
+	font-size: 1.1em;
+}
+#settings-title-row td{
+	padding-bottom: 16px;
+}
+#colour-picker-table td:nth-child(odd){
+	text-align: left;
+	padding-left: 16%;
+}
+#colour-picker-table td:nth-child(even){
+	text-align: right;
+	padding-right: 16%;
+}
+
+#colour-picker-table tr:nth-last-child(1) td{
+	border: none;
+	padding-top: 14px;
+	padding-bottom: 12px;
+}
+
+.colour-prompt {
+  width: 100%; /* or width: 100vw; */
+}
+
+.colour-prompt-content table {
+  width: 100%;
+	border-collapse: collapse;
+	magin: 0;
+}
+
+#theme-select{
+	border: 1px solid black;
+}
+
+
+
+@media screen and (min-width: 1431px){
+	#calc-table{
+		display: inline;
+	}
+	#show-second-table{
+		display: none;
+	}
+}
+
+@media screen and (max-width: 1430px) {
+	#calc-table {
+		display: none;
+	}
+
+	#show-second-table{
+		display: inline-block;
+	}
+
+@media only screen and (min-width: 650px) and (max-width: 1430px){
+	td{
+		width: 40vw;
+	}
+}
+
+@media only screen and (min-width: 10px) and (max-width: 650px) {
+    body {
+        font-size: 0.8em; /* Adjust based on viewport width */
+    }
+
+    
+    #input-table td, td, #calc-table thead th, #input-table thead th{
+    	min-width: 0px;
+    	width: 10px;
+    }
+    th{
+    	align-content: left;
+    	padding-bottom: 3px;
+    }
+
+    .name, .amount, .frequency-cell{
+    	width: 28vw;
+    }
+
+    #deletion-table{
+    	margin-right: 0px;
+    }
+
+    #input-table{
+    	width: 20vw;
+    	margin-right: 0;
+    
+    }
+
+    th{
+			text-align: left;
+			padding: 0 5px;
+			font-size: 1.1em;
+			height: auto;
+		}
+
+		#add-button{
+			height: 36px;
+			width: 60%;
+			font-size: 0.9em;
+		}
+
+		#options button{
+			width: auto;
+		}
+
+		#deletion-table{
+			margin: 0 4px 0 4px;
+		}
+
+		#options button:nth-child(1){
+			width: auto;
+		}
+
+		#show-second-table{
+			display: inline-block;
+			height: 36px;
+			font-size: 0.9em;
+		}
+
+		#calc-table{
+			font-size: 0.8em;
+		}
+
+		#frequency-select{
+			margin-right: 4px;
+		}
+
+		#colour-picker-table td:nth-child(odd){
+			width: 120px
+		}
+}
+
+		</style>
+
+
+
+	</head>
+	<body>
+		<div id="options">
+			<button class="stand-out-button">More by Jack</button>
+			<button class="stand-out-button" onclick="showColourPrompt()">Settings ⚙️</button>
+			<button class="stand-out-button" onclick="exportTables()">Export to Excel ⤓</button>
+			<button class="stand-out-button" onclick="resetHandler()">Reset ↺</button>
+
+		</div> 
+		<div class="centered-div">		
+			<div class="grid-container">
+				<table id="input-table" class="shadow-box">
+					<thead>
+						<tr>
+							<td id="title-cell" colspan="3">
+								<input id="table-title" class="hide-this" type="text" placeholder="Title...">
+							</td>
+						</tr>
+				        <tr>
+				            <th>Name</th>
+				            <th>Amount</th>
+				            <th>Frequency</th>
+				        </tr>
+				    </thead>
+				    <tbody>
+				    </tbody>
+				</table>
+				<table id="calc-table" class="shadow-box">
+					<thead>
+						<tr id="sum-row">
+							<td><p id="sum-daily">$0.00</p></td>
+							<td><p id="sum-weekly">$0.00</p></td>
+							<td><p id="sum-biweekly">$0.00</p></td>
+							<td><p id="sum-monthly">$0.00</p></td>
+							<td><p id="sum-quarterly">$0.00</p></td>
+							<td><p id="sum-semiyearly">$0.00</p></td>
+							<td><p id="sum-yearly">$0.00</p></td>
+						</tr>
+						<tr>
+				            <th>Daily</th>
+				            <th>Weekly</th>
+				            <th>Biweekly</th>
+				            <th>Monthly</th>
+				            <th>Quarterly</th>
+				            <th>Semi-annually</th>
+				            <th>Annually</th>
+				        </tr>
+				    </thead>
+				    <tbody>
+				    </tbody>			    
+				</table>
+				<table id="deletion-table">
+					<thead>
+						<tr>
+							<td></td>
+						</tr>
+						<tr class="hide-this"><th class="hide-this"><p class="hide-this">x</p></th></tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<i class="fa-solid fa-file-export"></i>
+		<div class="centered-div">
+			<button onclick="addRow()" id="add-button" class="stand-out-button">Add Row</button>
+			<button class="stand-out-button" id="show-second-table" onclick="changeTableInView()">Show Results $</button>
+		</div>
+		<div id="colour-prompt" class="colour-prompt-c">
+		  <div class="colour-prompt-content">
+		    <span class="close">&times;</span>
+		  	<table>
+		  		<tbody id="colour-picker-table">
+		  			<tr id="settings-title-row">
+		  				<td><p>Preset Themes</p></td>
+		  				<td>
+		  				<select id="theme-select">
+						 	<option value="default">Default</option>
+							<option value="back-white">Black/White</option>
+							<option value="blue">Blue</option>
+							<option value="green">Yellow</option>
+							<option value="yellow">Green</option>
+							<option value="red">Purple</option>
+							<option value="purple">Red</option>
+							<option value="purple">Windows DOS</option>
+						</select>
+					</td>
+		  			<tr class="hide-this">
+		  				<td><p class="hide-this">Header</p></td>
+		  				<td><input type="color" id="header-colorpicker" value="#CCCCCC"></td>
+		  			</tr>
+		  			<tr class="hide-this">
+		  				<td><p class="hide-this">Primary Colour</p></td>
+		  				<td><input type="color" id="primary-colorpicker" value="#FFFFFF"></td>
+		  			</tr>
+		  			<tr class="hide-this">
+		  				<td><p class="hide-this">Secondary Colour</p></td>
+		  				<td><input type="color" id="secondary-colorpicker" value="#EAEAEA"></td>
+		  			</tr>
+		  			<tr class="hide-this">
+		  				<td><p class="hide-this">Font Colour</p></td>
+		  				<td><input type="color" id="font-colorpicker" value="#00000"></td>
+		  			</tr>
+		  			<tr class="hide-this">
+		  				<td><p class="hide-this">Positive Colour</p></td>
+		  				<td><input type="color" id="positive-colorpicker" value="#B5EAD7"></td>
+		  			</tr>
+		  			<tr class="hide-this">
+		  				<td><p class="hide-this">Negative Colour</p></td>
+		  				<td><input type="color" id="negative-colorpicker" value="#FF9AA2"></td>
+		  			</tr>
+		  			<tr class="hide-this" class="">
+		  				<td><p>Round to the nearest</p></td>
+		  				<td>
+		  				<select id="decimal-placement-input">
+						 	<option value="zero-dec">1</option>
+							<option value="one-dec">0.1</option>
+							<option value="two-dec">0.01</option>
+							<option value="three-dec">0.001</option>
+							<option value="fourth-dec">0.0001</option>
+						</select>
+					</td>
+		  		</tbody>
+		  	</table>
+		  </div>
+		</div>
+
+		<div id="overlay"></div>
+
+		<script>
+			class Preset {
+	constructor(header, primary, secondary, font, positive, negative){
+		this.header = header;
+		this.primary = primary;
+		this.secondary = secondary;
+		this.fontColour = font;
+		this.positive = positive;
+		this.negative = negative;
+	}
+}
+
+class ExcelRow{
+	constructor(name, amount, frequency, daily, weekly, biweekly, monthly, quarterly, semiyearly, yearly) {      
+		this.name = name;
+		this.amount = amount;
+		this.frequency = frequency;
+		this.spacing = '';
+		this.daily = daily;
+		this.weekly = weekly;
+		this.biweekly = biweekly;
+		this.monthly = monthly;
+		this.quarterly = quarterly;
+		this.semiyearly = semiyearly;
+		this.yearly = yearly;
+	}
+}
+
+class SumsRow{
+	constructor(table, daily, weekly, biweekly, monthly, quarterly, semiyearly, yearly){
+		this.daily = daily;
+		this.weekly = weekly;
+		this.biweekly = biweekly;
+		this.monthly = monthly;
+		this.quarterly = quarterly;
+		this.semiyearly = semiyearly;
+		this.yearly = yearly;
+	}
+}
+
+// Themes -  = new Preset("#", "#", "#", "#", "#", "#")
+var defaultTheme = new Preset("#CCCCCC", "#FFFFFF", "#EAEAEA", "#000000", "#B5EAD7", "#FF9AA2")
+var blackWhiteTheme = new Preset("#D9D9D9", "#FFFFFF", "#C9C9C9", "#000000", "#F7F7F7", "#B8B8B8")
+var blueTheme = new Preset("#4169E1", "#F8FCFF", "#E6F7FF", "#000000", "#84F38A", "#FF7F68")
+var yellowTheme = new Preset("#FFBF00", "#FFF8E5", "#FFEFC2", "#000000", "#BDE2FF", "#FFA8A8")
+var greenTheme = new Preset("#2E8B57", "#EDFFF3", "#CCFFD9", "#000000", "#5FCB7A", "#FFA8A8");
+var purpleTheme = new Preset("#8A2BE2", "#F5EFFF", "#CA91FF", "#000000", "#5FCB7A", "#FFA8A8");
+var redTheme = new Preset("#FF5733", "#FFE5E5", "#FFCCCC", "#000000", "#5FCB7A", "#FFA8A8");
+var windowsDOS = new Preset("#0062FF", "#FFFFFF", "#A5A5A5", "#00000", "#04FF00", "#FF0000")
+
+var tableRowId = 0;
+var sumsRowElement = document.getElementById("sum-row")
+var sumsRow = new SumsRow()
+sumsRow.daily = document.getElementById("sum-daily")
+sumsRow.weekly = document.getElementById("sum-weekly")
+sumsRow.biweekly = document.getElementById("sum-biweekly")
+sumsRow.monthly = document.getElementById("sum-monthly")
+sumsRow.quarterly = document.getElementById("sum-quarterly")
+sumsRow.semiyearly = document.getElementById("sum-semiyearly")
+sumsRow.yearly = document.getElementById("sum-yearly")
+
+var inputTable = document.getElementById("input-table");
+var calcTable = document.getElementById("calc-table");
+var delTable = document.getElementById("deletion-table");
+var titleInput = document.getElementById("table-title")
+var colourInputs = document.querySelectorAll('input[type="color"]');
+var decimalPlaceInput = document.getElementById('decimal-placement-input');
+var themeSelectInput = document.getElementById('theme-select');
+var addRowButton = document.getElementById('add-button');
+var showSecondTableButton = document.getElementById('show-second-table');
+decimalPlaceInput.selectedIndex = 2;
+
+let optionsButtons = document.getElementById('options').querySelectorAll('.stand-out-button')
+
+colourInputs.forEach(function(element){
+	element.addEventListener('input', function(){
+		applyColour();
+	})
+})
+
+if(window.innerWidth < 600){
+ 	changeOptionsButtons(true)
+}
+else{
+ 	changeOptionsButtons(false)
+}
+
+
+themeSelectInput.addEventListener('input', function(element){
+	var selected = element.target.selectedIndex;
+	switch(selected){
+	case 0:
+		assigningColourTheme(defaultTheme)
+		break;
+	case 1: 
+		assigningColourTheme(blackWhiteTheme)
+		break;
+	case 2:
+		assigningColourTheme(blueTheme);
+		break;
+	case 3:
+		assigningColourTheme(yellowTheme);
+		break;
+	case 4:
+		assigningColourTheme(greenTheme);
+		break;
+	case 5:
+		assigningColourTheme(purpleTheme);
+		break;
+	case 6:
+		assigningColourTheme(redTheme);
+		break;
+	case 7:
+		assigningColourTheme(windowsDOS);
+		break;
+	default:
+		console.log("invalid");
+	}
+	applyColour()
+})
+function assigningColourTheme(preset){
+	colourInputs[0].value = preset.header
+	colourInputs[1].value = preset.primary
+	colourInputs[2].value = preset.secondary
+	colourInputs[3].value = preset.fontColour
+	colourInputs[4].value = preset.positive
+	colourInputs[5].value = preset.negative
+}
+
+decimalPlaceInput.addEventListener('input', function(element){
+  decimalPlacement = element.target.selectedIndex;
+  recalculate();
+})
+
+function dropDownMenuIndex(element){
+	console.log(element)
+}
+
+var decimalPlacement = 2;
+
+addRow();
+
+function addRow(){
+  var inputTBody = inputTable.getElementsByTagName('tbody')[0];
+  var calcTBody = calcTable.getElementsByTagName('tbody')[0];
+  var delTBody = delTable.getElementsByTagName('tbody')[0];
+
+  var inputTableCount = inputTBody.getElementsByTagName('tr').length;
+  var calcTableCount = calcTBody.getElementsByTagName('tr').length;
+  var delTableCount = delTBody.getElementsByTagName('tr').length;
+
+	var textFieldCount = document.querySelectorAll('#input-table .name').length;
+
+	const inputCell = inputTBody.insertRow(textFieldCount);
+	const calcCell = calcTBody.insertRow(textFieldCount);
+	const delCell = delTBody.insertRow(delTableCount);
+	console.log(inputTableCount + ", " + calcTableCount);
+
+  inputCell.innerHTML = `
+		<td><input id="name" type="text" class="text-input name" placeholder="Name..."></td>
+		<td><input id="amount" type="text" class="text-input amount" placeholder="Amount..."></td>
+		<td id="frequency-cell">
+			<select id="frequency-select">
+			 	<option value="daily">Daily</option>
+				<option value="weekly">Weekly</option>
+				<option value="bi-weekly">Bi-Weekly</option>
+				<option value="monthly">Monthly</option>
+				<option value="quarterly">Quarterly</option>
+				<option value="semi-yearly">Semi-Yearly</option>
+				<option value="yearly">Yearly</option>
+			</select>
+		</td>
+  `;
+	
+	calcCell.innerHTML = `
+		<td><p id="daily">$${(0).toFixed(decimalPlacement)}</p></td>
+		<td><p id="weekly">$${(0).toFixed(decimalPlacement)}</p></td>
+		<td><p id="bi-weekly">$${(0).toFixed(decimalPlacement)}</p></td>
+		<td><p id="monthly">$${(0).toFixed(decimalPlacement)}</p></td>
+		<td><p id="quarterly">$${(0).toFixed(decimalPlacement)}</p></td>
+		<td><p id="semi-yearly">$${(0).toFixed(decimalPlacement)}</p></td>
+		<td><p id="yearly">$${(0).toFixed(decimalPlacement)}</p></td>
+  `;
+
+  delCell.innerHTML = `
+  	<td><input id="delete-button" type="button" class="stand-out-button" value="X"></td>
+  `;
+
+  inputCell.id = "content-row";
+  calcCell.id = "content-row";
+	addActionToTextfield();
+	addActionToDropDown();
+	addActionToDelButton()
+	applyColour();
+	
+}
+
+function addActionToTextfield(){
+	var textFields = document.querySelectorAll('#input-table .amount');
+	var lastTextFieldIndex = textFields.length - 1; // Get the index of the last element
+	// Add event listener only to the last text field
+	textFields[lastTextFieldIndex].addEventListener('input', function() {
+		var dropDownMenus = document.querySelectorAll('#input-table #frequency-select');
+	    console.log(lastTextFieldIndex);
+	    var newAmount = 0.00;
+	    try{
+	    	var newValue = this.value.replace(/\$/g, "");
+	    	newAmount = parseFloat(this.value);
+	    }
+	    catch{
+	    	return;
+	    }
+        // Get the parent cell (td) of the current text field
+        var cell = event.target.closest('td');
+        
+        // Get the row (tr) containing the cell
+        var row = cell.parentNode;
+        
+        // Get the index of the cell within the row
+        var rowIndex = Array.prototype.indexOf.call(row.parentNode.children, row);
+        console.log("Cell index editing:", rowIndex);
+
+        var dropDownSelection = DropDownNameConversion(dropDownMenus[rowIndex].value);
+
+        // Output the index of the cell
+		UpdateValues(newAmount, dropDownSelection, rowIndex);
+
+	});
+}
+
+function addActionToDropDown(){
+	var dropDownMenus = document.querySelectorAll('#input-table #frequency-select');
+	var lastDropDownMenuIndex = dropDownMenus.length - 1;
+
+	dropDownMenus[lastDropDownMenuIndex].addEventListener('change', function(event) {
+		var textFields = document.querySelectorAll('#input-table .amount');
+		var dropDownValueInput = DropDownNameConversion(this.value);
+		// Get the parent cell (td) of the current text field
+    var cell = event.target.closest('td');
+    
+    // Get the row (tr) containing the cell
+    var row = cell.parentNode;
+    
+    // Get the index of the cell within the row
+    var rowIndex = Array.prototype.indexOf.call(row.parentNode.children, row);
+
+    
+    // Output the index of the cell
+    console.log("TF: " + textFields.length + ", " + rowIndex);
+    console.log("1amount, from metric, index: " + parseFloat(textFields[rowIndex].value.replace(/\$/g, "")) + ", " + dropDownValueInput + ", " + rowIndex);
+		UpdateValues(parseFloat(textFields[rowIndex].value.replace(/\$/g, "")), String(dropDownValueInput), rowIndex);
+	});
+}
+
+function addActionToDelButton(){
+	var delButtons = document.querySelectorAll('#deletion-table #delete-button');
+	delButtons[delButtons.length - 1].addEventListener('click', handleDeleteButtonClick);
+}
+
+function DropDownNameConversion(name){
+	if (name.toLowerCase() == "bi-weekly"){ return "biweekly"; }
+	else if (name.toLowerCase() == "semi-yearly"){ return "semiyearly"; }
+	else{ return String(name).toLowerCase(); }
+}
+
+function UpdateValues(amount, fromMetric, index){
+
+    console.log("2amount, from metric, index: " + amount + ", " + fromMetric + ", " + index);    				
+    // Get the corresponding <p> element in Table 2
+    var dailyCalcText = document.querySelectorAll('#calc-table #daily')[index];
+    var weeklyCalcText = document.querySelectorAll('#calc-table #weekly')[index];
+    var biweeklyCalcText = document.querySelectorAll('#calc-table #bi-weekly')[index];
+    var monthlyCalcText = document.querySelectorAll('#calc-table #monthly')[index];
+    var quarterlyCalcText = document.querySelectorAll('#calc-table #quarterly')[index];
+    var semiYearlyCalcText = document.querySelectorAll('#calc-table #semi-yearly')[index];
+    var yearlyCalcText = document.querySelectorAll('#calc-table #yearly')[index];
+
+    var dropDown = document.querySelectorAll('#calc-table #frequency-select')[index];
+
+    var row = dailyCalcText.closest('tr');
+
+	// Get all cells in the row
+	var cellsInRow = row.querySelectorAll('td');
+
+    console.log("x " + document.querySelectorAll('#calc-table #daily').length)
+
+    // Update the content of <p> element with the value of text field
+    dailyCalcText.textContent = `${Conversion(amount, fromMetric, 'daily')}`;
+    weeklyCalcText.textContent = `${Conversion(amount, fromMetric, 'weekly')}`;
+    biweeklyCalcText.textContent = `${Conversion(amount, fromMetric, 'biweekly')}`;
+    monthlyCalcText.textContent = `${Conversion(amount, fromMetric, 'monthly')}`;
+    quarterlyCalcText.textContent = `${Conversion(amount, fromMetric, 'quarterly')}`;
+    semiYearlyCalcText.textContent = `${Conversion(amount, fromMetric, 'semiyearly')}`;
+    yearlyCalcText.textContent = `${Conversion(amount, fromMetric, 'yearly')}`;
+
+    UpdateSums();
+    if (amount < 0){
+    	cellsInRow.forEach(function(element){
+    		element.style.backgroundColor = colourInputs[5];
+    	})
+    }
+    else{
+    	cellsInRow.forEach(function(element){
+    		element.style.backgroundColor = colourInputs[4]
+    	})
+    }
+}
+
+function Conversion(input, fromMetric, toMetric){
+	const pcr = {
+	  daily: { daily: 1, weekly: 7, biweekly: 14, monthly: (365.25/12), quarterly: (365.25/4), semiyearly: (365.25/2), yearly: 365.25 },
+	  weekly: { weekly: 1, biweekly: 2, monthly: (365.25/84), quarterly: (365.25/28), semiyearly: (365.25/14), yearly: (365.25/7) },
+	  biweekly: { biweekly: 1, monthly: (365.25/168), quarterly: (365.25/48), semiyearly: (365.25/28), yearly: (365.25/14) },
+	  monthly: { monthly: 1, quarterly: 3, semiyearly: 6, yearly: 12 },
+	  quarterly: { quarterly: 1, semiyearly: 2, yearly: 4 },
+	  semiyearly: { semiyearly: 1, yearly: 2 },
+	  yearly: { yearly: 1 }
+	}
+	const conversionRates = {
+	  daily: { daily: 1, weekly: 7, biweekly: 14, monthly: (365.25/12), quarterly: (365.25/4), semiyearly: (365.25/2), yearly: 365.25 },
+	  weekly: { daily: (1/pcr['daily']['weekly']), weekly: 1, biweekly: 2, monthly: (365.25/84), quarterly: (365.25/28), semiyearly: (365.25/14), yearly: (365.25/7) },
+	  biweekly: { daily: (1/pcr['daily']['biweekly']), weekly: (1/pcr['weekly']['biweekly']), biweekly: 1, monthly: (365.25/168), quarterly: (365.25/48), semiyearly: (365.25/28), yearly: (365.25/14) },
+	  monthly: { daily: (1/pcr['daily']['monthly']), weekly: (1/pcr['weekly']['monthly']), biweekly: (1/pcr['biweekly']['monthly']), monthly: 1, quarterly: 3, semiyearly: 6, yearly: 12 },
+	  quarterly: { daily: (1/pcr['daily']['quarterly']), weekly: (1/pcr['weekly']['quarterly']), biweekly: (1/pcr['biweekly']['quarterly']), monthly: (1/pcr['monthly']['quarterly']), quarterly: 1, semiyearly: 2, yearly: 4 },
+	  semiyearly: { daily: (1/pcr['daily']['semiyearly']), weekly: (1/pcr['weekly']['semiyearly']), biweekly: (1/pcr['biweekly']['semiyearly']), monthly: (1/pcr['monthly']['semiyearly']), quarterly: 1/pcr['monthly']['quarterly'], semiyearly: 1, yearly: 2 },
+	  yearly: { daily: (1/pcr['daily']['yearly']), weekly: (1/pcr['weekly']['yearly']), biweekly: (1/pcr['biweekly']['yearly']), monthly: (1/pcr['monthly']['yearly']), quarterly: (1/pcr['quarterly']['yearly']), semiyearly: (1/pcr['semiyearly']['yearly']), yearly: 1 }
+	};
+
+	var newValue = input * conversionRates[fromMetric][toMetric];
+	console.log(`input*conversion(from,to): ${input}*conversion(${fromMetric},${toMetric} == ${newValue} | ${decimalPlacement}`)
+	var decimalRound = 10**decimalPlacement;
+	if (newValue < 0){ 
+		sumsRowElement.style.backgroundColor = colourInputs[5];
+		return String(`-$${Math.abs(Math.floor(newValue * decimalRound) / decimalRound).toFixed(decimalPlacement)}`) }
+	else{ 
+		sumsRowElement.style.backgroundColor = colourInputs[4];
+		return String(`$${Math.abs(Math.floor(newValue * decimalRound) / decimalRound).toFixed(decimalPlacement)}`) };
+
+}
+
+function UpdateSums(){
+	var tallyCollection = {
+		daily: document.querySelectorAll("#calc-table #daily"),
+		weekly: document.querySelectorAll("#calc-table #weekly"),
+		biweekly: document.querySelectorAll("#calc-table #bi-weekly"),
+		monthly: document.querySelectorAll("#calc-table #monthly"),
+		quarterly: document.querySelectorAll("#calc-table #quarterly"),
+		semiyearly: document.querySelectorAll("#calc-table #semi-yearly"),
+		yearly: document.querySelectorAll("#calc-table #yearly")
+	}
+
+	for (var key in tallyCollection) {
+	    var stockPile = 0;
+	    
+	    for (var j = 0; j < tallyCollection[key].length; j++) {
+	        var text = parseFloat(tallyCollection[key][j].textContent.replace(/\$/g, ""));
+	        stockPile += text;
+	    }
+	    console.log("KEY: " + key)
+	    if (stockPile < 0) { 
+	        sumsRow[key].textContent = `-$${Math.abs(stockPile).toFixed(decimalPlacement)}`;
+	    } else { 
+	        sumsRow[key].textContent = `$${Math.abs(stockPile).toFixed(decimalPlacement)}`;
+	    }
+	}
+	applyColour();
+}
+
+// Function to handle delete button click
+function handleDeleteButtonClick(event) {
+  // Assuming delete buttons have a common class like 'delete-button'
+	console.log("Delete");
+	var rowToDelete = event.target.closest('tr'); // Find the closest row element
+  // Delete corresponding rows in Table 1 and Table 2
+  deleteCorrespondingRows(rowToDelete);
+  recalculate();
+}
+
+// Function to delete corresponding rows in Table 1 and Table 2
+function deleteCorrespondingRows(rowToDelete) {
+
+  // Find the index of the row in Table 1 and Table 2
+  var rowIndex = rowToDelete.rowIndex;
+
+  // Delete corresponding rows in Table 1 and Table 2
+  inputTable.deleteRow(rowIndex);
+  calcTable.deleteRow(rowIndex);
+  delTable.deleteRow(rowIndex);
+}
+
+/* Reset Table */
+//Reset Button
+function resetHandler(){
+	console.log("Reset")
+	document.getElementById
+	inputTable.getElementsByTagName('tbody')[0].innerHTML = '';
+	calcTable.getElementsByTagName('tbody')[0].innerHTML = '';
+	delTable.getElementsByTagName('tbody')[0].innerHTML = '';
+	titleInput.value = '';
+	addRow();
+	recalculate();
+	changeTableInView();
+}
+
+/* Change Colours & Themes */
+// Get the modal
+var modal = document.getElementById('colour-prompt');
+var overlay = document.getElementById('overlay');
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+function showColourPrompt() {
+  modal.style.display = "block";
+  overlay.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+  overlay.style.display = "none";
+}
+
+function applyColour(){
+	//0Header, 1Prime, 2Sec, 3Font, 4Pos, 5Neg
+	var hrCollection = Array.from(document.getElementsByTagName('th'));
+	hrCollection.forEach(function(element){
+		if (!element.classList.contains('hide-this')){
+			element.style.backgroundColor = colourInputs[0].value;
+		}
+	});
+
+	var calcRowsCollection = Array.from(document.getElementById('calc-table').querySelectorAll('#content-row'));
+	var inputRowsCollection = Array.from(document.getElementById('input-table').querySelectorAll('#content-row'));
+	var textFieldCollection = Array.from(document.getElementById('input-table').querySelectorAll("input[type='text']"))
+	var sumRow = document.getElementById('sum-row');
+
+	for (var i = 0; i < calcRowsCollection.length; i++){
+		try{
+			var value = parseFloat(calcRowsCollection[i].querySelectorAll("p")[6].innerHTML.replace(/\$/g, ""));
+		}
+		catch{
+			var value = 0;
+		}
+		if(value > 0){
+			calcRowsCollection[i].style.backgroundColor = colourInputs[4].value;
+		}
+		else if(value < 0){
+			calcRowsCollection[i].style.backgroundColor = colourInputs[5].value;
+		}
+		else{
+			if((i%2) == 0){
+				calcRowsCollection[i].style.backgroundColor = colourInputs[1].value;
+			}
+			else{
+				calcRowsCollection[i].style.backgroundColor = colourInputs[2].value;
+			}
+		}
+	}
+	console.log('row" ', inputRowsCollection.length);
+	for (var i = 0; i < inputRowsCollection.length; i++){
+		if((i%2) == 0){
+			inputRowsCollection[i].style.backgroundColor = colourInputs[1].value;
+		}
+		else{
+			inputRowsCollection[i].style.backgroundColor = colourInputs[2].value;
+		}
+	}
+	var pCollection = Array.from(document.getElementsByTagName('p'));
+	pCollection.forEach(function(element){
+	    if (!element.classList.contains('hide-this')) {
+	        element.style.color = colourInputs[3].value;
+	    }
+	});
+
+	hrCollection.forEach(function(element){
+	    if (!element.classList.contains('hide-this')) {
+	        element.style.color = colourInputs[3].value;
+	    }
+	});
+
+	textFieldCollection.forEach(function(element){
+	    if (!element.classList.contains('hide-this')) {
+	        element.style.color = colourInputs[3].value;
+	    }
+	});
+
+	var sumValue = parseFloat(document.getElementById('sum-yearly').innerHTML.replace(/\$/g, ""));
+	if(sumValue < 0){
+		sumRow.style.backgroundColor = colourInputs[5].value;
+	}
+	else if( sumValue > 0){
+		sumRow.style.backgroundColor = colourInputs[4].value;
+	}
+	else{
+		sumRow.style.backgroundColor = colourInputs[1].value;
+	}
+}
+
+function recalculate(){
+	var inputAmountCollection = Array.from(document.getElementById('input-table').querySelectorAll('.amount'));
+	var frequencyInputCollection = Array.from(document.getElementById('input-table').querySelectorAll("#frequency-select"))
+
+	for (var i = 0; i < inputAmountCollection.length; i++){
+		console.log("x: " + inputAmountCollection[i].value + ", " + frequencyInputCollection[i].value)
+		UpdateValues(inputAmountCollection[i].value, frequencyInputCollection[i].value, i);
+	}
+}
+
+
+//Export Button
+
+function exportTables(){
+	exportTablesToExcel(titleInput.value)
+}
+
+function exportTablesToExcel(filename = 'exported_tables') {
+	//Create Workbook and Sheet
+  const wb = XLSX.utils.book_new();
+  const ws = XLSX.utils.json_to_sheet([]);
+  //Heading & sums row
+  var excelSumsRow = [[filename, '', '', '', sumsRow.daily.innerHTML, sumsRow.weekly.innerHTML, sumsRow.biweekly.innerHTML, sumsRow.monthly.innerHTML, sumsRow.quarterly.innerHTML, sumsRow.semiyearly.innerHTML, sumsRow.yearly.innerHTML]]
+  const heading = [['Name', 'Amount', 'Frequency', '', 'Daily', 'Weekly', 'Bi-Weekly', 'Monthly', 'Quarterly', 'Semi-Yearly', 'Yearly']]
+	var calcRowsCollection = Array.from(calcTable.querySelectorAll('#content-row'));
+	var inputRowsCollection = Array.from(inputTable.querySelectorAll('#content-row'));
+	XLSX.utils.sheet_add_json(ws, excelSumsRow, {origin: 'A1', skipHeader: true })
+  XLSX.utils.sheet_add_json(ws, heading, {origin: 'A2', skipHeader: true });
+
+  //Check if can loop through cells
+	if(calcRowsCollection.length != inputRowsCollection.length){
+		alert('Error: Tables are not equal, something went wrong...')
+		return
+	}
+	//Upload each row
+	for(var i = 0; i < inputRowsCollection.length; i++){
+		var row = new ExcelRow();
+		row.name = inputRowsCollection[i].querySelector('#name').value;
+		row.amount = inputRowsCollection[i].querySelector('#amount').value;
+		row.frequency = inputRowsCollection[i].querySelector('#frequency-select').value;
+
+		row.daily = calcRowsCollection[i].querySelector('#daily').innerHTML
+		row.weekly = calcRowsCollection[i].querySelector('#weekly').innerHTML
+		row.biweekly = calcRowsCollection[i].querySelector('#bi-weekly').innerHTML
+		row.monthly = calcRowsCollection[i].querySelector('#monthly').innerHTML
+		row.quarterly = calcRowsCollection[i].querySelector('#quarterly').innerHTML
+		row.semiyearly = calcRowsCollection[i].querySelector('#semi-yearly').innerHTML
+		row.yearly = calcRowsCollection[i].querySelector('#yearly').innerHTML
+		XLSX.utils.sheet_add_json(ws, [row], { origin: `A${i+3}`, skipHeader: true});
+	}  
+
+	if (filename == ""){ filename = "New File"}
+	// Update colours
+	//Sums
+		
+	//Update sheet
+	XLSX.utils.book_append_sheet(wb, ws, 'warrjack.com');
+  XLSX.writeFile(wb, filename + ".xlsx");
+}
+
+
+function changeOptionsButtons(makeSmall){
+	if(makeSmall){
+		optionsButtons[1].textContent = "⚙️"
+		optionsButtons[2].textContent = "⤓"
+		optionsButtons[3].textContent = "↺"
+	}
+	else{
+		optionsButtons[1].textContent = "Settings ⚙️"
+		optionsButtons[2].textContent = "Export to Excel ⤓"
+		optionsButtons[3].textContent = "Reset ↺"
+	}
+}
+
+
+// Listen for the resize event
+window.addEventListener('resize', function() {
+    if(window.innerWidth < 600){
+    	changeOptionsButtons(true)
+    }
+    else{
+    	changeOptionsButtons(false)
+    }
+});
+
+function changeTableInView(){
+
+	if(inputTable.style.display == "none"){
+		//Remove View From Everything
+		inputTable.style.display = "";
+		delTable.style.display = "";
+		addRowButton.style.display = "";
+
+		//Show Finance Table
+		calcTable.style.display = "none"
+
+		//Change Text in Show Results $
+		showSecondTableButton.textContent = "Show Results"
+	}
+	else{
+		//Remove View From Everything
+		inputTable.style.display = "none";
+		delTable.style.display = "none";
+		addRowButton.style.display = "none";
+
+		//Show Finance Table
+		calcTable.style.display = "inline-block"
+
+		//Change Text in Show Results $
+		showSecondTableButton.textContent = "Show Input Table"
+	}
+}
+
+
+
+		</script>
+	</body>
+</html>
+
